@@ -1,0 +1,38 @@
+version: "3"
+services:
+  mysql:
+    container_name: "mysql"
+    platform: linux/x86_64
+    image: mysql:5.7
+    networks:
+      - wordpress
+    volumes:
+      - /Users/cswook96/Desktop/docker-compose-test/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpresspass
+  wordpress:
+    container_name: "wordpress"
+    depends_on:
+      - mysql
+    image: wordpress
+    networks:
+      - wordpress
+    volumes:
+      - /Users/cswook96/Desktop/docker-compose-test/wordpress:/var/www/html
+    ports:
+      - 8085:80
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpresspass
+networks:
+  wordpress:
+#volumes:
+#  mysql000vol11:
+#  wordpress000vol2:
