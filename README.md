@@ -1,2 +1,2 @@
 # docker-compose
-docker compose practice
+docker-compose 파일 작성 연습
